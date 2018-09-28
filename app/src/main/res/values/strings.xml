@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AerisWeatherApp</string>
+    <string name="celsius">Celsius</string>
 </resources>

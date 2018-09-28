@@ -2,11 +2,15 @@ package com.example.c4q.aerisweatherapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.ToggleButton;
 
 import com.example.c4q.aerisweatherapp.data.Periods;
 import com.example.c4q.aerisweatherapp.data.WeatherApiResponse;
 import com.example.c4q.aerisweatherapp.data.WeatherApiService;
+import com.example.c4q.aerisweatherapp.presentation.WeatherAdapter;
 
 import java.util.List;
 
@@ -17,6 +21,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
+    ToggleButton switchWeather;
+    RecyclerView weatherRV;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +42,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<WeatherApiResponse> call, Response<WeatherApiResponse> response) {
                 List<Periods> periods = response.body().getResponse().get(0).getPeriods();
-                String date = periods.get(0).getDateTimeISO();
                 Log.e("Period ", periods.toString());
-                Log.e("Date: " , date);
+                Log.e("icon url", periods.get(0).getIcon());
+                setWeatherRV(periods);
             }
 
             @Override
@@ -44,6 +52,12 @@ public class MainActivity extends AppCompatActivity {
                 t.printStackTrace();
             }
         });
+    }
+
+    public void setWeatherRV(List<Periods> periodsList) {
+        weatherRV = findViewById(R.id.weather_rv);
+        weatherRV.setAdapter(new WeatherAdapter(periodsList));
+        weatherRV.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
     }
 
     public WeatherApiService getWeatherApiService(){
@@ -54,4 +68,6 @@ public class MainActivity extends AppCompatActivity {
 
         return retrofit.create(WeatherApiService.class);
     }
+
+
 }

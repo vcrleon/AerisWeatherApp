@@ -8,11 +8,13 @@
     tools:context="com.example.c4q.aerisweatherapp.MainActivity">
 
     <TextView
+        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Farenheit"/>
+        android:text="@string/celsius"/>
 
     <ToggleButton
+        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="50dp"/>
 

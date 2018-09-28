@@ -10,13 +10,15 @@ public class Periods {
     private int minTempC;
     private int maxTempF;
     private int maxTempC;
+    private String icon;
 
-    public Periods(String dateTimeISO, int minTempF, int minTempC, int maxTempF, int maxTempC) {
+    public Periods(String dateTimeISO, int minTempF, int minTempC, int maxTempF, int maxTempC, String icon) {
         this.dateTimeISO = dateTimeISO;
         this.minTempF = minTempF;
         this.minTempC = minTempC;
         this.maxTempF = maxTempF;
         this.maxTempC = maxTempC;
+        this.icon = icon;
     }
 
     public String getDateTimeISO() {
@@ -37,5 +39,9 @@ public class Periods {
 
     public int getMaxTempC() {
         return maxTempC;
+    }
+
+    public String getIcon() {
+        return icon;
     }
 }
